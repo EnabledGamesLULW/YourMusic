@@ -1,0 +1,62 @@
+{
+  "command": [
+    {
+      "name": "User Joins Server",
+      "perms": [],
+      "actions": [
+        {
+          "name": "sendWelcomeMessage",
+          "category": "Message",
+          "type": "Send Embed",
+          "channelname": "${serverVars.welcomeChannel}",
+          "color": "009EFF",
+          "title": "Willkommen ${tempVars.newuser.user.tag}!",
+          "url": "",
+          "authorname": "",
+          "authorimageurl": "",
+          "authorlink": "",
+          "description": "Willkommen <@${tempVars.newuser.id}>, du bist der **${dbsVars.guild.memberCount}** User auf **${dbsVars.guild.name}**!",
+          "thumbnail": "${tempVars.newuser.user.avatarURL}",
+          "image": "",
+          "footer": "",
+          "timestamp": "BOOL_TRUE@@",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ],
+      "var": {
+        "user": "newuser"
+      }
+    },
+    {
+      "name": "Any Message",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "msguser"
+      }
+    },
+    {
+      "name": "User Kicked",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "kickuser"
+      }
+    },
+    {
+      "name": "User Banned",
+      "perms": [],
+      "actions": [],
+      "var": {
+        "user": "banuser"
+      }
+    },
+    {
+      "name": "Bot Initialization",
+      "perms": [],
+      "actions": [],
+      "var": {}
+    }
+  ]
+}

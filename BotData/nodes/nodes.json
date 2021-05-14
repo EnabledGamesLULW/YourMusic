@@ -1,0 +1,519 @@
+{
+  "nodes": [
+    {
+      "type": "command",
+      "name": "play",
+      "guid": "ba45b1b0-53a3-4013-b944-864703d269b8",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "5c759c86-8ca4-4a96-84aa-0106be6dc4c1"
+          ]
+        }
+      ],
+      "x": 108,
+      "y": 119
+    },
+    {
+      "type": "response",
+      "name": "getSongToPlay",
+      "guid": "5c759c86-8ca4-4a96-84aa-0106be6dc4c1",
+      "reactionFields": [],
+      "embedfields": [],
+      "saveToVariable": "songVar",
+      "saveToVariableType": "temp",
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "c906d0d5-df72-4346-9095-2d84a8d0f8f5"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "ba45b1b0-53a3-4013-b944-864703d269b8"
+        }
+      ],
+      "x": 292,
+      "y": 110,
+      "rtype": "Variable",
+      "rsubtype": "Store Value in Variable",
+      "formdata": [
+        "songVar",
+        "Text",
+        "temp",
+        "0"
+      ],
+      "formnames": [
+        "varname",
+        "vartype",
+        "saveVarType",
+        "param"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "VoiceManager1",
+      "guid": "c906d0d5-df72-4346-9095-2d84a8d0f8f5",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "20e4d3dc-4043-4bd6-902d-a5db31fa53db"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "5c759c86-8ca4-4a96-84aa-0106be6dc4c1"
+        }
+      ],
+      "x": 474,
+      "y": 103,
+      "rtype": "Bot Action",
+      "rsubtype": "Voice Manager",
+      "formdata": [
+        "isAuthorInVC",
+        "2",
+        "9",
+        ""
+      ],
+      "formnames": [
+        "info",
+        "ifTrue",
+        "ifFalse",
+        "volume"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "comfirm1",
+      "guid": "20e4d3dc-4043-4bd6-902d-a5db31fa53db",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "efb899b0-c1f2-4c8d-af1e-9500b9f3bc0c"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "c906d0d5-df72-4346-9095-2d84a8d0f8f5"
+        }
+      ],
+      "x": 651,
+      "y": 106,
+      "rtype": "Message",
+      "rsubtype": "Send Message",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "**Der Song wird gestartet...**",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelName",
+        "messageText",
+        "saveToVariable",
+        "saveToVariableType"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "getYtVideo",
+      "guid": "efb899b0-c1f2-4c8d-af1e-9500b9f3bc0c",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "3ef45d55-5ac5-4641-bb04-96d0974d526c"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "20e4d3dc-4043-4bd6-902d-a5db31fa53db"
+        }
+      ],
+      "x": 838,
+      "y": 106,
+      "rtype": "Bot Action",
+      "rsubtype": "Get YouTube Video",
+      "formdata": [
+        "${tempVars.songVar}",
+        "temp",
+        "videoLink"
+      ],
+      "formnames": [
+        "searchQuery",
+        "varType",
+        "storeResult"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "playYtVideo",
+      "guid": "3ef45d55-5ac5-4641-bb04-96d0974d526c",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "1070eb54-aa0e-4651-bce9-e33cad4e39e0"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "efb899b0-c1f2-4c8d-af1e-9500b9f3bc0c"
+        }
+      ],
+      "x": 1015,
+      "y": 109,
+      "rtype": "Bot Action",
+      "rsubtype": "Play YouTube Video",
+      "formdata": [
+        "${tempVars.videoLink}",
+        "temp",
+        "songTitle",
+        "5",
+        "",
+        "7"
+      ],
+      "formnames": [
+        "songURL",
+        "varType",
+        "storeResult",
+        "onSuccess",
+        "onFinish",
+        "onError"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "Playing...",
+      "guid": "1070eb54-aa0e-4651-bce9-e33cad4e39e0",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "3ef45d55-5ac5-4641-bb04-96d0974d526c"
+        }
+      ],
+      "x": 1185,
+      "y": 111,
+      "rtype": "Message",
+      "rsubtype": "Send Message",
+      "formdata": [
+        "${dbsVars.CommandChannel.id}",
+        "**Spielt ${tempVars.songTitle}**\n**Angefordert von ${dbsVars.CommandAuthor.user.tag}**",
+        "",
+        "temp"
+      ],
+      "formnames": [
+        "channelName",
+        "messageText",
+        "saveToVariable",
+        "saveToVariableType"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "listen",
+      "guid": "b9c3d384-f966-4274-9379-1898d5c9e4d1",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "921f4523-13d7-4211-bf70-5e36c58ce9a0"
+          ]
+        }
+      ],
+      "x": 93,
+      "y": 902,
+      "perms": []
+    },
+    {
+      "type": "response",
+      "name": "setListen",
+      "guid": "921f4523-13d7-4211-bf70-5e36c58ce9a0",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "b9c3d384-f966-4274-9379-1898d5c9e4d1"
+        }
+      ],
+      "x": 287,
+      "y": 905,
+      "rtype": "Bot Action",
+      "rsubtype": "Set Bot Activity",
+      "formdata": [
+        "!help",
+        "LISTENING",
+        ""
+      ],
+      "formnames": [
+        "activityname",
+        "activitytype",
+        "streamurl"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "chill",
+      "guid": "9f789f2a-f1f4-40cc-a8a9-726b0991b536",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "9879c707-0822-4cca-b171-e7001e0eb95b"
+          ]
+        }
+      ],
+      "x": 104,
+      "y": 302,
+      "perms": []
+    },
+    {
+      "type": "response",
+      "name": "playRadio",
+      "guid": "9ed33ff9-6a27-4a76-8e0c-a589525fde1e",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "0682b3bd-e317-4113-8955-ebb967fc2225"
+        }
+      ],
+      "x": 661,
+      "y": 300,
+      "rtype": "Bot Action",
+      "rsubtype": "Play YouTube Video",
+      "formdata": [
+        "https://www.youtube.com/watch?v=21qNxnCS8WU",
+        "temp",
+        "chill",
+        "5",
+        "",
+        "7"
+      ],
+      "formnames": [
+        "songURL",
+        "varType",
+        "storeResult",
+        "onSuccess",
+        "onFinish",
+        "onError"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "VoiceManager1_1",
+      "guid": "9879c707-0822-4cca-b171-e7001e0eb95b",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "0682b3bd-e317-4113-8955-ebb967fc2225"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9f789f2a-f1f4-40cc-a8a9-726b0991b536"
+        }
+      ],
+      "x": 294,
+      "y": 288,
+      "rtype": "Bot Action",
+      "rsubtype": "Voice Manager",
+      "formdata": [
+        "isAuthorInVC",
+        "2",
+        "9",
+        ""
+      ],
+      "formnames": [
+        "info",
+        "ifTrue",
+        "ifFalse",
+        "volume"
+      ]
+    },
+    {
+      "type": "response",
+      "name": "getYtVideo_1",
+      "guid": "0682b3bd-e317-4113-8955-ebb967fc2225",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": [
+            "9ed33ff9-6a27-4a76-8e0c-a589525fde1e"
+          ]
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "9879c707-0822-4cca-b171-e7001e0eb95b"
+        }
+      ],
+      "x": 478,
+      "y": 305,
+      "rtype": "Bot Action",
+      "rsubtype": "Get YouTube Video",
+      "formdata": [
+        "https://www.youtube.com/watch?v=21qNxnCS8WU",
+        "temp",
+        "chillLink"
+      ],
+      "formnames": [
+        "searchQuery",
+        "varType",
+        "storeResult"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "stop",
+      "guid": "1bbd51d4-e3d5-4516-b3df-edb6be8ee0ba",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "14769c47-1ea2-4003-a18c-79775d39cc7b"
+          ]
+        }
+      ],
+      "x": 106,
+      "y": 493
+    },
+    {
+      "type": "response",
+      "name": "leaveChannel_1",
+      "guid": "14769c47-1ea2-4003-a18c-79775d39cc7b",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "1bbd51d4-e3d5-4516-b3df-edb6be8ee0ba"
+        }
+      ],
+      "x": 294,
+      "y": 477,
+      "rtype": "Bot Action",
+      "rsubtype": "Voice Manager",
+      "formdata": [
+        "stopPlaying",
+        "",
+        "",
+        ""
+      ],
+      "formnames": [
+        "info",
+        "ifTrue",
+        "ifFalse",
+        "volume"
+      ]
+    },
+    {
+      "type": "command",
+      "name": "leave",
+      "guid": "bb20f33f-29d9-4d85-a3cc-b8dd855bce8c",
+      "outputs": [
+        {
+          "label": "responses",
+          "connections": [
+            "c0639751-775c-4eb5-ae0e-3000a3085f7e"
+          ]
+        }
+      ],
+      "x": 103,
+      "y": 662
+    },
+    {
+      "type": "response",
+      "name": "leaveChannel2",
+      "guid": "c0639751-775c-4eb5-ae0e-3000a3085f7e",
+      "reactionFields": [],
+      "embedfields": [],
+      "outputs": [
+        {
+          "label": "next response",
+          "connections": []
+        }
+      ],
+      "inputs": [
+        {
+          "label": "trigger",
+          "id": "bb20f33f-29d9-4d85-a3cc-b8dd855bce8c"
+        }
+      ],
+      "x": 290,
+      "y": 642,
+      "rtype": "Bot Action",
+      "rsubtype": "Voice Manager",
+      "formdata": [
+        "leaveVC",
+        "",
+        "",
+        ""
+      ],
+      "formnames": [
+        "info",
+        "ifTrue",
+        "ifFalse",
+        "volume"
+      ]
+    }
+  ]
+}

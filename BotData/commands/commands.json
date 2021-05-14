@@ -1,0 +1,140 @@
+{
+  "command": [
+    {
+      "name": "play",
+      "actions": [
+        {
+          "name": "getSongToPlay",
+          "category": "Variable",
+          "type": "Store Value in Variable",
+          "varname": "songVar",
+          "vartype": "Text",
+          "savevartype": "temp",
+          "param": "0"
+        },
+        {
+          "name": "VoiceManager1",
+          "category": "Bot Action",
+          "type": "Voice Manager",
+          "info": "isAuthorInVC",
+          "iftrue": "2",
+          "iffalse": "9",
+          "volume": ""
+        },
+        {
+          "name": "comfirm1",
+          "category": "Message",
+          "type": "Send Message",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "**Der Song wird gestartet...**",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        },
+        {
+          "name": "getYtVideo",
+          "category": "Bot Action",
+          "type": "Get YouTube Video",
+          "searchquery": "${tempVars.songVar}",
+          "vartype": "temp",
+          "storeresult": "videoLink"
+        },
+        {
+          "name": "playYtVideo",
+          "category": "Bot Action",
+          "type": "Play YouTube Video",
+          "songurl": "${tempVars.videoLink}",
+          "vartype": "temp",
+          "storeresult": "songTitle",
+          "onsuccess": "5",
+          "onfinish": "",
+          "onerror": "7"
+        },
+        {
+          "name": "Playing...",
+          "category": "Message",
+          "type": "Send Message",
+          "channelname": "${dbsVars.CommandChannel.id}",
+          "messagetext": "**Spielt ${tempVars.songTitle}**\n**Angefordert von ${dbsVars.CommandAuthor.user.tag}**",
+          "savetovariable": "",
+          "savetovariabletype": "temp"
+        }
+      ]
+    },
+    {
+      "name": "listen",
+      "perms": [],
+      "actions": [
+        {
+          "name": "setListen",
+          "category": "Bot Action",
+          "type": "Set Bot Activity",
+          "activityname": "!help",
+          "activitytype": "LISTENING",
+          "streamurl": ""
+        }
+      ]
+    },
+    {
+      "name": "chill",
+      "perms": [],
+      "actions": [
+        {
+          "name": "VoiceManager1_1",
+          "category": "Bot Action",
+          "type": "Voice Manager",
+          "info": "isAuthorInVC",
+          "iftrue": "2",
+          "iffalse": "9",
+          "volume": ""
+        },
+        {
+          "name": "getYtVideo_1",
+          "category": "Bot Action",
+          "type": "Get YouTube Video",
+          "searchquery": "https://www.youtube.com/watch?v=21qNxnCS8WU",
+          "vartype": "temp",
+          "storeresult": "chillLink"
+        },
+        {
+          "name": "playRadio",
+          "category": "Bot Action",
+          "type": "Play YouTube Video",
+          "songurl": "https://www.youtube.com/watch?v=21qNxnCS8WU",
+          "vartype": "temp",
+          "storeresult": "chill",
+          "onsuccess": "5",
+          "onfinish": "",
+          "onerror": "7"
+        }
+      ]
+    },
+    {
+      "name": "stop",
+      "actions": [
+        {
+          "name": "leaveChannel_1",
+          "category": "Bot Action",
+          "type": "Voice Manager",
+          "info": "stopPlaying",
+          "iftrue": "",
+          "iffalse": "",
+          "volume": ""
+        }
+      ]
+    },
+    {
+      "name": "leave",
+      "actions": [
+        {
+          "name": "leaveChannel2",
+          "category": "Bot Action",
+          "type": "Voice Manager",
+          "info": "leaveVC",
+          "iftrue": "",
+          "iffalse": "",
+          "volume": ""
+        }
+      ]
+    }
+  ]
+}
