@@ -315,3 +315,5 @@ DBS.logError = async function(error) {
     process.send(error.message);
     console.log(error.message);
 };
+
+bot.login(process.env.token)
